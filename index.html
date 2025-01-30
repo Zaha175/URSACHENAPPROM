@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicație de Cercetare a Cauzelor Abuzului de Alcool</title>
+    <style>
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.gamma.app/fhpleqvbjim2f32/generated-images/m5jbKxn54d6Q01a4tMJgN.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .app-container {
+            background-color: transparent;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 900px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background-color: #ffffcc; /* Galben deschis */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+            background-repeat: no-repeat;
+            background-position-x: 100%;
+            background-position-y: 5px;
+        }
+
+        select::-ms-expand {
+            display: none;
+        }
+
+        .button-group {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: #007bff;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: default;
+        }
+
+        .progress {
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .results {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        .results h3 {
+            margin-top: 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="card">
+            <div class="cardContent">
+                <h2 class="text-xl font-bold mb-4 step-title">Pasul 1 din 5</h2>
+                <div class="progress"></div>
+
+                <div id="step1">
+                    <h3>Context Cultural</h3>
+                    <label for="ethnicity">Aparținerea etnică:</label>
+                    <input type="text" id="ethnicity" placeholder="Vă rugăm să specificați...">
+
+                    <label for="values">Valori și norme:</label>
+                    <input type="text" id="values" placeholder="Vă rugăm să descrieți...">
+
+                    <h3>Experiență de Migrație</h3>
+                    <label for="migrationReason">Motivul migrației:</label>
+                    <select id="migrationReason">
+                        <option value="">Vă rugăm să alegeți</option>
+                        <option value="munca">Muncă</option>
+                        <option value="refugiu">Refugiu</option>
+                        <option value="familie">Familie</option>
+                        <option value="educatie">Educație</option>
+                    </select>
+
+                    <label for="integration">Provocări la integrare:</label>
+                    <input type="text" id="integration" placeholder="Vă rugăm să explicați...">
+
+                    <h3>Mediu Social</h3>
+                    <label for="friends">Număr de prieteni apropiați:</label>
+                    <input type="number" id="friends" min="0">
+
+                    <label for="support">Vă simțiți sprijinit de mediul înconjurător?</label>
+                    <select id="support">
+                        <option value="">Vă rugăm să alegeți</option>
+                        <option value="da">Da</option>
+                        <option value="nu">Nu</option>
+                        <option value="parțial">Parțial</option>
+                    </select>
+
+                    <label for="alcoholPressure">Presiunea grupului privind consumul de alcool:</label>
+                    <select id="alcoholPressure">
+                        <option value="">Vă rugăm să alegeți</option>
+                        <option value="niciodata">Niciodată</option>
+                        <option value="rar">Rar</option>
+                        <option value="ocazional">Ocazional</option>
+                        <option value="adesea">Deseori</option>
+                    </select>
+                </div>
+
+                <div id="step2" style="display: none;">
+                    <h3>Obiceiuri de Consum</h3>
+                    <label for="alcoholType">Tipul de alcool:</label>
+                    <select id="alcoholType">
+                        <option value="">Vă rugăm să alegeți</option>
+                        <option value="bere">Bere</option>
+                        <option value="vin">Vin</option>
+                        <option value="spirtoase">Spirtoase</option>
+                        <option value="bere+spirtoase">Bere + Spirtoase</option>
+                        <option value="toate">Toate</option>
+                    </select>
+
+                    <label for="drinkingFrequency">Cât de des consumați?</label>
+                    <select id="drinkingFrequency">
+                        <option value="">Vă rugăm să alegeți</option>
+                        <option value="adesea">Deseori</option>
+                        <option value="foarte_adesea">Foarte des</option>
+                        <option value="zilnic">Zilnic</option>
+                        <option value="doar_weekend">Doar în weekend</option>
+                        <option value="deloc">Deloc</option>
+                    </select>
+
+                    <label for="control">Pierderea controlului:</label>
+                    <select id="control">
+                        <option value="">Vă rugăm să alegeți</option>
+                        <option value="da">Da</option>
+                        <option value="nu">Nu</option>
+                        <option value="ocazional">Ocazional</option>
+                    </select>
+                </div>
+
+                <div id="step3" style="display: none;">
+                    <h3>Experiențe din Copilărie și Adolescență</h3>
+                    <label for="gender">Gen:</label>
+                    <select id="gender">
+                        <option value="">Vă rugăm să alegeți</option>
+                        <option value="masculin">Masculin</option>
+                        <option value="feminin">Feminin</option>
+                    </select>
+
+                    <label for="religion">Religie:</label>
+                    <select id="religion">
+                        <option value="">Vă rugăm să alegeți</option>
+                        <option value="da">Da</option>
+                        <option value="nu">Nu</option>
+                    </select>
+
+                    <label for="married">Căsătorit:</label>
+                    <select id="married">
+                        <option value="">Vă rugăm să alegeți</option>
+                        <option value="da">Da</option>
+                        <option value="nu">Nu</option>
+                    </select>
+
+                    <label for="children">Copii:</label>
+                    <select id="children">
+                        <option value="">Vă rugăm să alegeți</option>
+                        <option value="da">Da</option>
+                        <option value="nu">Nu</option>
+                    </select>
+       
+          <label for="bullying">Experiențe cu bullying sau excludere la școală?:</label>
+                 <select id="bullying">
+                 <option value="">Vă rugăm să alegeți</option>
+                <option value="niciodata">Niciodată</option>
+               <option value="rar">Rar</option>
+              <option value="ocazional">Ocazional</option>
+             <option value="deseori">Deseori</option>
+             </select>
+
+                    <label for="familySupport">Sprijin emoțional din partea părinților:</label>
+                    <select id="familySupport">
+                        <option value="">Vă rugăm să alegeți</option>
+                        <option value="da">Da</option>
+                        <option value="parțial">Parțial</option>
+                        <option value="nu">Nu</option>
+                        <option value="niciunul">Nu am avut</option>
+                        <option value="doar_mama">Doar mama</option>
+                        <option value="doar_tata">Doar tatăl</option>
+                    </select>
+
+                    <label for="familyConflicts">Conflicte în familie:</label>
+                    <select id="familyConflicts">
+                        <option value="">Vă rugăm să alegeți</option>
+                        <option value="niciodata">Niciodată</option>
+                        <option value="rar">Rar</option>
+                        <option value="adesea">Deseori</option>
+                    </select>
+                </div>
+
+                <div id="step4" style="display: none;">
+                    <h3>Nevoi Interioare și Convingeri</h3>
+                    <label for="selfWorth">Stima de sine:</label>
+                    <select id="selfWorth">
+                        <option value="">Vă rugăm să alegeți</option>
+                        <option value="ridicata">Ridicată</option>
+                        <option value="medie">Medie</option>
+                        <option value="scazuta">Scăzută</option>
+                    </select>
+
+                    <label for="perfectionism">Perfecționism:</label>
+                    <select id="perfectionism">
+                        <option value="">Vă rugăm să alegeți</option>
+                        <option value="da">Da</option>
+                        <option value="parțial">Parțial</option>
+                        <option value="nu">Nu</option>
+                    </select>
+                </div>
+
+                <div id="step5" style="display: none;">
+                    <h3>Analiză și Evaluare</h3>
+                    <div class="results">
+                        <h3>Rezumatul răspunsurilor dumneavoastră:</h3>
+                        <p><strong>Aparținerea etnică:</strong> <span id="summary-ethnicity"></span></p>
+                        <p><strong>Valori și norme:</strong> <span id="summary-values"></span></p>
+                        <p><strong>Motivul migrației:</strong> <span id="summary-migration"></span></p>
+                        <p><strong>Provocări la integrare:</strong> <span id="summary-integration"></span></p>
+                        <p><strong>Număr de prieteni apropiați:</strong> <span id="summary-friends"></span></p>
+                        <p><strong>Sprijin din partea mediului:</strong> <span id="summary-support"></span></p>
+                        <p><strong>Presiunea grupului privind consumul de alcool:</strong> <span id="summary-alcohol-pressure"></span></p>
+                        <p><strong>Obiceiuri de consum:</strong></p>
+                        <p>- Tipul de alcool: <span id="summary-alcohol-type"></span></p>
+                        <p>- Frecvența consumului: <span id="summary-drinking-frequency"></span></p>
+                        <p>- Pierderea controlului: <span id="summary-control"></span></p>
+                        <p><strong>Experiențe din copilărie și adolescență:</strong></p>
+                        <p>- Gen: <span id="summary-gender"></span></p>
+                        <p>- Religie: <span id="summary-religion"></span></p>
+                        <p>- Căsătorit: <span id="summary-married"></span></p>
+                        <p><strong>Bullying/Excludere socială:</strong> <span id="summary-bullying"></span></p>
+                        <p>- Copii: <span id="summary-children"></span></p>
+                        <p>- Sprijin emoțional din partea părinților: <span id="summary-family-support"></span></p>
+                        <p>- Conflicte în familie: <span id="summary-family-conflicts"></span></p>
+                        <p><strong>Nevoi interioare:</strong></p>
+                        <p>- Stima de sine: <span id="summary-self-worth"></span></p>
+                        <p>- Perfecționism: <span id="summary-perfectionism"></span></p>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-between button-group">
+                    <button id="backButton" disabled>Înapoi</button>
+                    <button id="nextButton">Înainte</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+
+        function updateStepDisplay() {
+            for (let i = 1; i <= totalSteps; i++) {
+                document.getElementById(`step${i}`)?.style.setProperty("display", i === currentStep ? "block" : "none");
+            }
+            document.getElementById('backButton').disabled = currentStep === 1;
+            document.getElementById('nextButton').disabled = currentStep === totalSteps;
+            document.querySelector('.step-title').textContent = `Pasul ${currentStep} din ${totalSteps}`;
+
+            if (currentStep === 5) {
+                document.getElementById('summary-ethnicity').textContent = document.getElementById('ethnicity').value || "Niciun răspuns";
+                document.getElementById('summary-values').textContent = document.getElementById('values').value || "Niciun răspuns";
+                document.getElementById('summary-migration').textContent = document.getElementById('migrationReason').value || "Niciun răspuns";
+                document.getElementById('summary-integration').textContent = document.getElementById('integration').value || "Niciun răspuns";
+                document.getElementById('summary-friends').textContent = document.getElementById('friends').value || "Niciun răspuns";
+                document.getElementById('summary-support').textContent = document.getElementById('support').value || "Niciun răspuns";
+                document.getElementById('summary-alcohol-pressure').textContent = document.getElementById('alcoholPressure').value || "Niciun răspuns";
+                document.getElementById('summary-alcohol-type').textContent = document.getElementById('alcoholType').value || "Niciun răspuns";
+                document.getElementById('summary-drinking-frequency').textContent = document.getElementById('drinkingFrequency').value || "Niciun răspuns";
+                document.getElementById('summary-control').textContent = document.getElementById('control').value || "Niciun răspuns";
+                document.getElementById('summary-gender').textContent = document.getElementById('gender').value || "Niciun răspuns";
+                document.getElementById('summary-religion').textContent = document.getElementById('religion').value || "Niciun răspuns";
+                document.getElementById('summary-married').textContent = document.getElementById('married').value || "Niciun răspuns";
+                document.getElementById('summary-bullying').textContent = document.getElementById('bullying').value || "Niciun răspuns";
+                document.getElementById('summary-children').textContent = document.getElementById('children').value || "Niciun răspuns";
+                document.getElementById('summary-family-support').textContent = document.getElementById('familySupport').value || "Niciun răspuns";
+                document.getElementById('summary-family-conflicts').textContent = document.getElementById('familyConflicts').value || "Niciun răspuns";
+                document.getElementById('summary-self-worth').textContent = document.getElementById('selfWorth').value || "Niciun răspuns";
+                document.getElementById('summary-perfectionism').textContent = document.getElementById('perfectionism').value || "Niciun răspuns";
+            }
+        }
+
+        document.getElementById('nextButton').addEventListener('click', () => {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateStepDisplay();
+            }
+        });
+
+        document.getElementById('backButton').addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepDisplay();
+            }
+        });
+
+        updateStepDisplay();
+    </script>
+</body>
+</html>
