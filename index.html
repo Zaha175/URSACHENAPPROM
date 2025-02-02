@@ -3,8 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplicație de Cercetare a Cauzelor Abuzului de Alcool</title>
+    <title>Aplicație Cercetare Cauze Abuz Alcool - Westworld Style</title>
+
+    <!-- Orbitron Font (SciFi/Westworld-Feeling) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
+        /* --- Globale Westworld-Anmutung --- */
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000; /* Schwarzer Hintergrund */
+            color: #00ffff; /* Neon-Cyan für Text */
+            letter-spacing: 0.05em;
+        }
+
+        /* Großes Hintergrundbild (optional) */
         body::before {
             content: "";
             position: fixed;
@@ -16,114 +33,146 @@
             background-size: cover;
             background-position: center;
             z-index: -1;
-            opacity: 1;
-            transition: opacity 0.3s ease-in-out;
+            opacity: 0.8; /* Leicht durchscheinen lassen */
         }
 
+        /* Container für die gesamte App */
         .app-container {
-            background-color: transparent;
-            padding: 20px;
-            border-radius: 10px;
             max-width: 900px;
-            width: 100%;
-            box-sizing: border-box;
+            margin: 2em auto;
+            padding: 1em;
+            background: rgba(0, 0, 0, 0.6); /* Halbtransparentes Schwarz */
+            border: 1px solid #00ffff;      /* Neon-Rand */
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
         }
 
+        /* Panel / Karte im Westworld-Stil */
         .card {
-            background-color: #ffffcc; /* Galben deschis */
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
+            background: #000;               /* Schwarz */
+            border: 1px solid #00ffff;      /* Neon-Cyan Rand */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,255,255,0.3);
         }
 
+        /* Überschriften / Titel der Steps */
+        .card h2, .card h3 {
+            margin-top: 0;
+            text-shadow: 0 0 5px #00ffff;
+            color: #00ffff;
+        }
+
+        /* Step-Titel (Pasul 1 din 5 etc.) */
+        .step-title {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        /* Progress-Bereich optional */
+        .progress {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #00ffff;
+        }
+
+        /* Label-Stil */
         label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #333;
+            margin-bottom: 6px;
+            font-weight: normal;
+            color: #00ffff;
+            font-size: 0.95em;
         }
 
+        /* Inputs & Select-Felder */
         input[type="text"],
+        input[type="number"],
         select {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
+            padding: 8px;
+            margin-bottom: 12px;
+            background-color: #111;
+            border: 1px solid #0ff;
+            border-radius: 3px;
+            font-size: 0.95em;
+            color: #00ffff;
             box-sizing: border-box;
         }
 
+        /* Placeholder-Farbe für dunkles Layout */
+        ::-webkit-input-placeholder { color: #aaa; }
+        :-ms-input-placeholder { color: #aaa; }
+        ::placeholder { color: #aaa; }
+
+        /* Aussehen der Select-Pfeile anpassen */
         select {
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+            background-image: url("data:image/svg+xml,%3Csvg fill='cyan' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position-x: 100%;
-            background-position-y: 5px;
+            background-position: 98% 50%;
+            background-size: 18px;
         }
-
         select::-ms-expand {
             display: none;
         }
 
+        /* Button-Gruppe (Zurück / Weiter) */
         .button-group {
             margin-top: 20px;
             display: flex;
             justify-content: space-between;
         }
-
         button {
             padding: 10px 20px;
-            border: none;
+            border: 1px solid #00ffff;
             border-radius: 5px;
-            color: white;
-            background-color: #007bff;
+            color: #00ffff;
+            background-color: #000;
             cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease, box-shadow 0.3s;
         }
-
         button:hover {
-            background-color: #0056b3;
+            background-color: #00ffff;
+            color: #000;
+            box-shadow: 0 0 8px rgba(0,255,255,0.5);
         }
-
         button:disabled {
-            background-color: #ccc;
+            opacity: 0.4;
             cursor: default;
         }
 
-        .progress {
-            margin-bottom: 15px;
-        }
-
-        .step-title {
-            margin-bottom: 15px;
-            color: #555;
-        }
-
+        /* Ergebnis-Box (step5) */
         .results {
             margin-top: 20px;
             padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background-color: #fff;
+            background-color: #111;
+            border: 1px solid #00ffff;
+            border-radius: 6px;
         }
-
+        .results p {
+            margin: 6px 0;
+            color: #00ffff;
+        }
         .results h3 {
             margin-top: 0;
-            color: #333;
+            color: #00ffff;
+            text-shadow: 0 0 4px #00ffff;
         }
     </style>
 </head>
 <body>
+
     <div class="app-container">
         <div class="card">
             <div class="cardContent">
-                <h2 class="text-xl font-bold mb-4 step-title">Pasul 1 din 5</h2>
+                <!-- Titel der Steps -->
+                <h2 class="step-title">Pasul 1 din 5</h2>
                 <div class="progress"></div>
 
+                <!-- STEP 1 -->
                 <div id="step1">
                     <h3>Context Cultural</h3>
                     <label for="ethnicity">Aparținerea etnică:</label>
@@ -167,6 +216,7 @@
                     </select>
                 </div>
 
+                <!-- STEP 2 -->
                 <div id="step2" style="display: none;">
                     <h3>Obiceiuri de Consum</h3>
                     <label for="alcoholType">Tipul de alcool:</label>
@@ -198,6 +248,7 @@
                     </select>
                 </div>
 
+                <!-- STEP 3 -->
                 <div id="step3" style="display: none;">
                     <h3>Experiențe din Copilărie și Adolescență</h3>
                     <label for="gender">Gen:</label>
@@ -227,15 +278,15 @@
                         <option value="da">Da</option>
                         <option value="nu">Nu</option>
                     </select>
-       
-          <label for="bullying">Experiențe cu bullying sau excludere la școală?:</label>
-                 <select id="bullying">
-                 <option value="">Vă rugăm să alegeți</option>
-                <option value="niciodata">Niciodată</option>
-               <option value="rar">Rar</option>
-              <option value="ocazional">Ocazional</option>
-             <option value="deseori">Deseori</option>
-             </select>
+
+                    <label for="bullying">Experiențe cu bullying sau excludere la școală?:</label>
+                    <select id="bullying">
+                        <option value="">Vă rugăm să alegeți</option>
+                        <option value="niciodata">Niciodată</option>
+                        <option value="rar">Rar</option>
+                        <option value="ocazional">Ocazional</option>
+                        <option value="deseori">Deseori</option>
+                    </select>
 
                     <label for="familySupport">Sprijin emoțional din partea părinților:</label>
                     <select id="familySupport">
@@ -257,6 +308,7 @@
                     </select>
                 </div>
 
+                <!-- STEP 4 -->
                 <div id="step4" style="display: none;">
                     <h3>Nevoi Interioare și Convingeri</h3>
                     <label for="selfWorth">Stima de sine:</label>
@@ -276,6 +328,7 @@
                     </select>
                 </div>
 
+                <!-- STEP 5 (Rezultate) -->
                 <div id="step5" style="display: none;">
                     <h3>Analiză și Evaluare</h3>
                     <div class="results">
@@ -305,7 +358,8 @@
                     </div>
                 </div>
 
-                <div class="mt-6 flex justify-between button-group">
+                <!-- Button-Gruppe: Înapoi / Înainte -->
+                <div class="button-group">
                     <button id="backButton" disabled>Înapoi</button>
                     <button id="nextButton">Înainte</button>
                 </div>
@@ -321,40 +375,61 @@
             for (let i = 1; i <= totalSteps; i++) {
                 document.getElementById(`step${i}`)?.style.setProperty("display", i === currentStep ? "block" : "none");
             }
-            document.getElementById('backButton').disabled = currentStep === 1;
-            document.getElementById('nextButton').disabled = currentStep === totalSteps;
+            document.getElementById('backButton').disabled = (currentStep === 1);
+            document.getElementById('nextButton').disabled = (currentStep === totalSteps);
+
             document.querySelector('.step-title').textContent = `Pasul ${currentStep} din ${totalSteps}`;
 
-            if (currentStep === 5) {
-                document.getElementById('summary-ethnicity').textContent = document.getElementById('ethnicity').value || "Niciun răspuns";
-                document.getElementById('summary-values').textContent = document.getElementById('values').value || "Niciun răspuns";
-                document.getElementById('summary-migration').textContent = document.getElementById('migrationReason').value || "Niciun răspuns";
-                document.getElementById('summary-integration').textContent = document.getElementById('integration').value || "Niciun răspuns";
-                document.getElementById('summary-friends').textContent = document.getElementById('friends').value || "Niciun răspuns";
-                document.getElementById('summary-support').textContent = document.getElementById('support').value || "Niciun răspuns";
-                document.getElementById('summary-alcohol-pressure').textContent = document.getElementById('alcoholPressure').value || "Niciun răspuns";
-                document.getElementById('summary-alcohol-type').textContent = document.getElementById('alcoholType').value || "Niciun răspuns";
-                document.getElementById('summary-drinking-frequency').textContent = document.getElementById('drinkingFrequency').value || "Niciun răspuns";
-                document.getElementById('summary-control').textContent = document.getElementById('control').value || "Niciun răspuns";
-                document.getElementById('summary-gender').textContent = document.getElementById('gender').value || "Niciun răspuns";
-                document.getElementById('summary-religion').textContent = document.getElementById('religion').value || "Niciun răspuns";
-                document.getElementById('summary-married').textContent = document.getElementById('married').value || "Niciun răspuns";
-                document.getElementById('summary-bullying').textContent = document.getElementById('bullying').value || "Niciun răspuns";
-                document.getElementById('summary-children').textContent = document.getElementById('children').value || "Niciun răspuns";
-                document.getElementById('summary-family-support').textContent = document.getElementById('familySupport').value || "Niciun răspuns";
-                document.getElementById('summary-family-conflicts').textContent = document.getElementById('familyConflicts').value || "Niciun răspuns";
-                document.getElementById('summary-self-worth').textContent = document.getElementById('selfWorth').value || "Niciun răspuns";
-                document.getElementById('summary-perfectionism').textContent = document.getElementById('perfectionism').value || "Niciun răspuns";
+            // Wenn letzter Schritt, dann Zusammenfassung generieren
+            if (currentStep === totalSteps) {
+                document.getElementById('summary-ethnicity').textContent 
+                    = document.getElementById('ethnicity').value || "Niciun răspuns";
+                document.getElementById('summary-values').textContent 
+                    = document.getElementById('values').value || "Niciun răspuns";
+                document.getElementById('summary-migration').textContent 
+                    = document.getElementById('migrationReason').value || "Niciun răspuns";
+                document.getElementById('summary-integration').textContent 
+                    = document.getElementById('integration').value || "Niciun răspuns";
+                document.getElementById('summary-friends').textContent 
+                    = document.getElementById('friends').value || "Niciun răspuns";
+                document.getElementById('summary-support').textContent 
+                    = document.getElementById('support').value || "Niciun răspuns";
+                document.getElementById('summary-alcohol-pressure').textContent 
+                    = document.getElementById('alcoholPressure').value || "Niciun răspuns";
+                document.getElementById('summary-alcohol-type').textContent 
+                    = document.getElementById('alcoholType').value || "Niciun răspuns";
+                document.getElementById('summary-drinking-frequency').textContent 
+                    = document.getElementById('drinkingFrequency').value || "Niciun răspuns";
+                document.getElementById('summary-control').textContent 
+                    = document.getElementById('control').value || "Niciun răspuns";
+                document.getElementById('summary-gender').textContent 
+                    = document.getElementById('gender').value || "Niciun răspuns";
+                document.getElementById('summary-religion').textContent 
+                    = document.getElementById('religion').value || "Niciun răspuns";
+                document.getElementById('summary-married').textContent 
+                    = document.getElementById('married').value || "Niciun răspuns";
+                document.getElementById('summary-bullying').textContent 
+                    = document.getElementById('bullying').value || "Niciun răspuns";
+                document.getElementById('summary-children').textContent 
+                    = document.getElementById('children').value || "Niciun răspuns";
+                document.getElementById('summary-family-support').textContent 
+                    = document.getElementById('familySupport').value || "Niciun răspuns";
+                document.getElementById('summary-family-conflicts').textContent 
+                    = document.getElementById('familyConflicts').value || "Niciun răspuns";
+                document.getElementById('summary-self-worth').textContent 
+                    = document.getElementById('selfWorth').value || "Niciun răspuns";
+                document.getElementById('summary-perfectionism').textContent 
+                    = document.getElementById('perfectionism').value || "Niciun răspuns";
             }
         }
 
+        // Buttons
         document.getElementById('nextButton').addEventListener('click', () => {
             if (currentStep < totalSteps) {
                 currentStep++;
                 updateStepDisplay();
             }
         });
-
         document.getElementById('backButton').addEventListener('click', () => {
             if (currentStep > 1) {
                 currentStep--;
@@ -362,6 +437,7 @@
             }
         });
 
+        // Initialer Aufruf
         updateStepDisplay();
     </script>
 </body>
